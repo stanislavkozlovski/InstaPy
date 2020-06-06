@@ -1,6 +1,5 @@
 certifi>=2018.10.15
 chardet>=3.0.4
-clarifai>=2.4.1
 configparser>=3.5.0
 EasyProcess>=0.2.3
 emoji>=0.5.1

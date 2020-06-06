@@ -18,7 +18,6 @@ except ModuleNotFoundError:
 
 # import InstaPy modules
 from . import __version__
-from .clarifai_util import check_image
 from .comment_util import comment_image
 from .comment_util import get_comments_on_post
 from .comment_util import process_comments
@@ -112,7 +111,7 @@ class InstaPy:
         disable_image_load: bool = False,
         multi_logs: bool = True,
         log_handler=None,  # TODO function type ?
-        geckodriver_path: str = None,
+        driver_path: str = None,
         split_db: bool = False,
         bypass_security_challenge_using: str = "email",
         want_check_browser: bool = True,
@@ -317,7 +316,7 @@ class InstaPy:
                 browser_profile_path,
                 disable_image_load,
                 page_delay,
-                geckodriver_path,
+                driver_path,
                 browser_executable_path,
                 self.logger,
             )
@@ -421,6 +420,8 @@ class InstaPy:
 
             self.aborting = True
             return self
+
+        self.password = "NONE" # overide the password for health, after we've logged in
 
         # back the page_delay to default, or the value set by the user
         self.browser.implicitly_wait(self.page_delay)
@@ -832,22 +833,22 @@ class InstaPy:
 
         return self
 
-    def query_clarifai(self):
-        """Method for querying Clarifai using parameters set in
-        clarifai_check_img_for"""
-        return check_image(
-            self.browser,
-            self.clarifai_api_key,
-            self.clarifai_img_tags,
-            self.clarifai_img_tags_skip,
-            self.logger,
-            self.clarifai_models,
-            self.clarifai_workflow,
-            self.clarifai_probability,
-            self.clarifai_full_match,
-            self.clarifai_check_video,
-            proxy=self.clarifai_proxy,
-        )
+    # def query_clarifai(self):
+    #     """Method for querying Clarifai using parameters set in
+    #     clarifai_check_img_for"""
+    #     return check_image(
+    #         self.browser,
+    #         self.clarifai_api_key,
+    #         self.clarifai_img_tags,
+    #         self.clarifai_img_tags_skip,
+    #         self.logger,
+    #         self.clarifai_models,
+    #         self.clarifai_workflow,
+    #         self.clarifai_probability,
+    #         self.clarifai_full_match,
+    #         self.clarifai_check_video,
+    #         proxy=self.clarifai_proxy,
+    #     )
 
     def follow_commenters(
         self,
