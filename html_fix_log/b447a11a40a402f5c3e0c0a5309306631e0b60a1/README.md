@@ -1,0 +1,1 @@
+The HTML part with the followee's data is in `<td class="line-content"></td>`, whereas the code previously relied on something tagged with `pre`
