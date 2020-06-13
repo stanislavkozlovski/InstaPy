@@ -426,7 +426,7 @@ def get_following(
         # fetch all user while still has data
         while has_next_data:
             try:
-                pre = browser.find_element_by_tag_name("pre").text
+                pre = browser.find_element_by_class_name("line-content").text
             except NoSuchElementException as exc:
                 logger.info(
                     "Encountered an error to find `pre` in page!"
